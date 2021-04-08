@@ -7,7 +7,6 @@ const Http = require("http");
 
 // Imports
 const Server = Express();
-const HttpServer = Http.createServer(Server);
 const CONTEXT_PATH = process.env.CONTEXT_PATH;
 const PORT = process.env.PORT || 5000;
 const RouterMux = require("./RouterMux.js");
@@ -24,12 +23,13 @@ Database.InitilizeDatabase();
 // Parsing User data
 Server.use(Express.json());
 Server.use(Express.urlencoded({ extended: true }));
-
+Server.use(Express.static("uploads"))
 // Router
+
 Server.use(CONTEXT_PATH, RouterMux);
 console.log("c-path", CONTEXT_PATH);
 // Server is listening to port
-HttpServer.listen(PORT, () => {
+Server.listen(PORT, () => {
     console.log(
         new Date().toString() +
             " Server is listening to port " +

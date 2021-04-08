@@ -5,12 +5,15 @@ const Express = require("express");
 const Router = Express.Router();
 
 // imports
-const ProfileRouter = require("../router/ProfileRouter.js");
+//const ProfileRouter = require("../router/ProfileRouter.js");
+const JWTRouter = require("../router/LogRoute.js")
+const ProductRouter = require("../router/ProductRoute.js")
+Router.get('/',()=>{
+    console.log("Router Mux")
+})
 
-
-
-Router.use(ProfileRouter);
-
+Router.use(JWTRouter)
+Router.use(ProductRouter)
 
 // Testing Router
 Router.get("/ping", (req, res) => {
